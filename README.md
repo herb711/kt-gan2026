@@ -14,6 +14,8 @@ This repository contains the implementation for the paper:
 
 1. **Preprocessing (Optional if data is already prepared)**:
     You can preprocess raw datasets using `data_preprocess.py`. 
+    > **Acknowledgement**: The data preprocessing module is adapted from [pykt-toolkit](https://github.com/pykt-team/pykt-toolkit.git).
+
     Example for assist2009:
     ```bash
     python data_preprocess.py --dataset_name assist2009
