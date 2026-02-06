@@ -1,0 +1,98 @@
+(llm) root@ecm-70b5:~/workcopy/kt-gan/prl-sum2026# python data_preprocess.py --dataset_name assist2009 --min_seq_len 3 --maxlen 200 --kfold 5
+Namespace(dataset_name='assist2009', file_path='/root/workcopy/datasets/data/peiyou/grade3_students_b_200.csv', min_seq_len=3, maxlen=200, kfold=5)
+Start preprocessing data: assist2009
+original interaction num: 525534, user num: 4217, question num: 26688, concept num: 123, avg(ins) per s: 124.6227, avg(c) per q: 1.1969, na: 8937
+after drop interaction num: 459208, user num: 4163, question num: 17751, concept num: 123, avg(ins) per s: 110.307, avg(c) per q: 1.1969, na: 0
+525534,4217,26688,123,124.6227,1.1969,8937
+459208,4163,17751,123,110.307,1.1969,0
+--------------------------------------------------
+dname: /root/workcopy/kt-gan/assist2009, writef: /root/workcopy/kt-gan/assist2009/data.txt
+rm: cannot remove '/root/workcopy/kt-gan/assist2009/*.pkl': No such file or directory
+delete bad stu num of len: 279, delete interactions: 442, of r: 0, good num: 458766
+====================
+original total interactions: 458766, qs: 17737, cs: 123, seqnum: 3884
+df.columns: Index(['uid', 'is_repeat', 'questions', 'concepts', 'responses'], dtype='object')
+====================
+after extend multi, total interactions: 458766, qs: 17737, cs: 123, seqnum: 3884
+total num: 3884, train+valid num: 3108, test num: 776
+fold: 1, start: 0, end: 622, total num: 3108
+fold: 2, start: 622, end: 1244, total num: 3108
+fold: 3, start: 1244, end: 1866, total num: 3108
+fold: 4, start: 1866, end: 2487, total num: 3108
+fold: 5, start: 2487, end: 3108, total num: 3108
+train+valid original interactions num: 374422, select num: 0, qs: 17371, cs: 122, seqnum: 3108
+dropnum: 8
+train+valid sequences interactions num: 374414, select num: 374414, qs: 17371, cs: 122, seqnum: 4243
+dropnum: 4
+original test interactions num: 84344, select num: 0, qs: 13448, cs: 118, seqnum: 776
+test sequences interactions num: 84340, select num: 84340, qs: 13448, cs: 118, seqnum: 1018
+====================
+test window interactions num: 7851513, select num: 84344, qs: 13448, cs: 118, seqnum: 39807
+test question interactions num: 84340, select num: 83564, qs: 13448, cs: 118, seqnum: 1018
+test question window interactions num: 7851513, select num: 83568, qs: 13448, cs: 118, seqnum: 39807
+====================
+original,458766,3884,0
+extend multi,458766,3884,0
+original train+valid,374422,3108,0
+train+valid sequences,374414,4243,374414
+test original,84344,776,0
+test sequences,84340,1018,84340
+test window,7851513,39807,84344
+test question,84340,1018,83564
+test question window,7851513,39807,83568
+====================================================================================================
+delete bad stu num of len: 279, delete interactions: 442, of r: 0, good num: 458766
+====================
+original total interactions: 458766, qs: 17737, cs: 123, seqnum: 3884
+df.columns: Index(['responses', 'questions', 'concepts', 'uid'], dtype='object')
+total num: 3884, train+valid num: 3108, test num: 776
+fold: 1, start: 0, end: 622, total num: 3108
+fold: 2, start: 622, end: 1244, total num: 3108
+fold: 3, start: 1244, end: 1866, total num: 3108
+fold: 4, start: 1866, end: 2487, total num: 3108
+fold: 5, start: 2487, end: 3108, total num: 3108
+train+valid original interactions num: 374422, select num: 0, qs: 17371, cs: 122, seqnum: 3108
+dropnum: 8
+train+valid sequences interactions num: 374414, select num: 374414, qs: 17371, cs: 122, seqnum: 4243
+dropnum: 4
+original test interactions num: 84344, select num: 0, qs: 13448, cs: 118, seqnum: 776
+test sequences interactions num: 84340, select num: 84340, qs: 13448, cs: 118, seqnum: 1018
+====================
+test window interactions num: 7851513, select num: 84344, qs: 13448, cs: 118, seqnum: 39807
+====================
+original,458766,3884,0
+original train+valid question level,374422,3108,0
+train+valid sequences question level,374414,4243,374414
+test original question level,84344,776,0
+test sequences question level,84340,1018,84340
+test window question level,7851513,39807,84344
+(llm) root@ecm-70b5:~/workcopy/kt-gan/prl-sum2026# python main.py --data_path "/root/workcopy/kt-gan/assist2009/train_valid_sequences.csv"
+>>> Loading Datasets...
+>>> Start Training Loop...
+/root/anaconda3/envs/llm/lib/python3.10/site-packages/torch/autograd/graph.py:841: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:270.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+Epoch 1 | KT Loss:0.5427 | Val AUC:0.7931 | Val ACC:0.7609 | Val RMSE:0.4126 | GCS:0.0000
+[BEST] Saved at epoch 1
+Epoch 2 | KT Loss:0.4414 | Val AUC:0.8285 | Val ACC:0.7681 | Val RMSE:0.3970 | GCS:1.0000
+[BEST] Saved at epoch 2
+Epoch 3 | KT Loss:0.4155 | Val AUC:0.8460 | Val ACC:0.7862 | Val RMSE:0.3846 | GCS:1.0000
+[BEST] Saved at epoch 3
+Epoch 4 | KT Loss:0.4061 | Val AUC:0.8669 | Val ACC:0.7886 | Val RMSE:0.3743 | GCS:1.0000
+[BEST] Saved at epoch 4
+Epoch 5 | KT Loss:0.3972 | Val AUC:0.8752 | Val ACC:0.7971 | Val RMSE:0.3705 | GCS:1.0000
+[BEST] Saved at epoch 5
+Epoch 6 | KT Loss:0.3915 | Val AUC:0.8800 | Val ACC:0.8007 | Val RMSE:0.3658 | GCS:1.0000
+[BEST] Saved at epoch 6
+Epoch 7 | KT Loss:0.3853 | Val AUC:0.8804 | Val ACC:0.8007 | Val RMSE:0.3641 | GCS:1.0000
+[BEST] Saved at epoch 7
+Epoch 8 | KT Loss:0.3796 | Val AUC:0.8904 | Val ACC:0.8068 | Val RMSE:0.3589 | GCS:1.0000
+[BEST] Saved at epoch 8
+Epoch 9 | KT Loss:0.3757 | Val AUC:0.8906 | Val ACC:0.8019 | Val RMSE:0.3588 | GCS:1.0000
+[BEST] Saved at epoch 9
+Epoch 10 | KT Loss:0.3705 | Val AUC:0.8915 | Val ACC:0.8080 | Val RMSE:0.3578 | GCS:1.0000
+[BEST] Saved at epoch 10
+Epoch 11 | KT Loss:0.3669 | Val AUC:0.8943 | Val ACC:0.8043 | Val RMSE:0.3622 | GCS:1.0000
+[BEST] Saved at epoch 11
+Epoch 12 | KT Loss:0.3603 | Val AUC:0.9005 | Val ACC:0.8116 | Val RMSE:0.3526 | GCS:1.0000
+[BEST] Saved at epoch 12
+(llm) root@ecm-70b5:~/workcopy/kt-gan/prl-sum2026# 
