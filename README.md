@@ -1,10 +1,19 @@
-# Anonymous Code Repository
+# Official Implementation: Robust Personalized Representation Learning for Sparse User Modeling
 
-This repository contains the implementation for the paper:
+This repository contains the source code and experimental scripts for the paper:
 
-> "Robust Personalized Representation Learning for Sparse User Modeling" (under anonymous review)
+> **"Robust Personalized Representation Learning for Sparse User Modeling"**
 
-## Environment
+## 📂 Repository Structure
+- `main.py`: Main entry point for training and evaluation.
+- `model.py`: Neural network architectures (PRL-SUM).
+- `data_preprocess.py`: Data preprocessing scripts for benchmark datasets.
+- `preprocess/`: Contains dataset-specific logic (e.g., for ASSIST2009).
+- `CompArch_sample.csv`: A sanitized sample of the proprietary CompArch dataset for schema verification.
+- `run.sh`: One-click execution script with default hyperparameters.
+
+## 🛠️ Environment Setup
+
 - Python 3.9
 - PyTorch >= 1.13
 - CUDA 11.7
@@ -12,7 +21,12 @@ This repository contains the implementation for the paper:
 
 ## Running
 
-1. **Preprocessing (Optional if data is already prepared)**:
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/herb711/kt-gan2026.git](https://github.com/herb711/kt-gan2026.git)
+   cd kt-gan2026
+
+2. **Preprocessing (Optional if data is already prepared)**:
     You can preprocess raw datasets using `data_preprocess.py`. 
     > **Acknowledgement**: The data preprocessing module is adapted from [pykt-toolkit](https://github.com/pykt-team/pykt-toolkit.git).
 
@@ -21,7 +35,7 @@ This repository contains the implementation for the paper:
     python data_preprocess.py --dataset_name assist2009
     ```
 
-2. **Training**:
+3. **Training**:
     Run the main training script. You can specify the path to your dataset using `--data_path`.
     
     ```bash
